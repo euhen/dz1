@@ -6,9 +6,12 @@
 
 compress(List) ->
     compress(List, false).
+
+% Private helper
+
 compress([Head|Tail], Head) ->
     compress(Tail, Head);
-compress([Head|Tail], _Prev_elem) ->
-    [Head] ++ compress(Tail, Head);
-compress([], _Prev_elem) ->
+compress([Head|Tail], _PrevElem) ->
+    [Head|compress(Tail, Head)];
+compress([], _PrevElem) ->
     [].

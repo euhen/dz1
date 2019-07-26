@@ -4,9 +4,13 @@
 -module(p07).
 -export([flatten/1]).
 
-flatten([Head|Tail]) ->
-    flatten(Head) ++ flatten(Tail);
-flatten([]) ->
-    [];
-flatten(Element) ->
-    [Element].
+flatten(L) ->
+    p05:reverse(flatten(L, [])).
+flatten([ [_|_]=H|T ], Acc) ->
+    flatten(T, flatten(H, Acc));
+flatten([ []|T ], Acc) ->
+    flatten(T, Acc);
+flatten([ H|T ], Acc) ->
+    flatten(T, [H|Acc]);
+flatten([], Acc) ->
+    Acc.

@@ -4,7 +4,11 @@
 -module(p05).
 -export([reverse/1]).
 
-reverse([Head|Tail]) ->
-    reverse(Tail) ++ [Head];
-reverse([]) ->
-    [].
+reverse(List) ->
+    reverse(List, []).
+
+% Private
+reverse([Head|Tail], Accumulator) ->
+    reverse(Tail, [Head|Accumulator]);
+reverse([], Accumulator) ->
+    Accumulator.

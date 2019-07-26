@@ -9,8 +9,8 @@ pack([Head|Tail]) ->
 
 % Private
 pack([Head|Tail], [Head|Same_elems]) ->
-    pack(Tail, [Head] ++ [Head] ++ Same_elems);
+    pack(Tail, [Head,Head|Same_elems]);
 pack([Head|Tail], Same_elems) ->
-    [Same_elems] ++ pack(Tail, [Head]);
+    [Same_elems|pack(Tail, [Head])];
 pack([], Same_elems) ->
     [Same_elems].

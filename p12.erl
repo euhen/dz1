@@ -5,16 +5,14 @@
 -export([decode_modified/1]).
 
 decode_modified([{Counter, Element}|Tail]) ->
-    clone_element(Element, Counter) ++ decode_modified(Tail);
+    clone_element([Element|decode_modified(Tail)], Counter);
 decode_modified([Head|Tail]) ->
-    [Head] ++ decode_modified(Tail);
+    [Head|decode_modified(Tail)];
 decode_modified([]) ->
     [].
 
 % Private helper
-clone_element([Element|Clones], 1) ->
-    [Element] ++ Clones;
-clone_element([Element|_Clones], Counter) ->
-    [Element] ++ clone_element(Element, Counter - 1);
-clone_element(Element, Counter) ->
-    clone_element([Element], Counter).
+clone_element([_Element|_Clones]=ResultList, 1) ->
+    ResultList;
+clone_element([Element|Clones], Counter) ->
+    clone_element([Element, Element|Clones], Counter - 1).

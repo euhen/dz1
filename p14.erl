@@ -5,6 +5,6 @@
 -export([duplicate/1]).
 
 duplicate([Element|Tail]) ->
-    [Element, Element] ++ duplicate(Tail);
+    [Element, Element|duplicate(Tail)];
 duplicate([]) ->
     [].

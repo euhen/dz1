@@ -11,6 +11,6 @@ encode([Head|Tail]) ->
 encode([Head|Tail], Head, Counter) ->
     encode(Tail, Head, Counter + 1);
 encode([Head|Tail], Element, Counter) ->
-    [{Counter, Element}] ++ encode(Tail, Head, 1);
+    [{Counter, Element}|encode(Tail, Head, 1)];
 encode([], Element, Counter) ->
     [{Counter, Element}].
